@@ -26,6 +26,11 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Before install
+
+You must create file src/config.ts:
+export const JWT_SECRET = 'your_secret';
+
 ## Installation
 
 ```bash
