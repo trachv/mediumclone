@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UserEntity } from '../user/user.entity';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { ArticleEntity } from './atricle.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArticleResponseInterface } from './types/article-response.interface';
 import slugify from 'slugify';
@@ -26,6 +26,46 @@ export class ArticleService {
     article.slug = this.getSlug(createArticleDto.title);
     article.author = currentUser;
     return await this.articleRepository.save(article);
+  }
+
+  async updateArticle(
+    slug: string,
+    updateArticleDto: CreateArticleDto,
+    currentUserId: number,
+  ): Promise<ArticleEntity> {
+    const article = await this.findBySlug(slug);
+    if (!article) {
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND);
+    }
+    if (article.author.id !== currentUserId) {
+      throw new HttpException(
+        'You are not allowed to delete this article',
+        HttpStatus.FORBIDDEN,
+      );
+    }
+    Object.assign(article, updateArticleDto);
+    return await this.articleRepository.save(article);
+  }
+
+  async findBySlug(slug: string): Promise<ArticleEntity> {
+    return await this.articleRepository.findOne({ where: { slug } });
+  }
+
+  async deleteArticle(
+    slug: string,
+    currentUserId: number,
+  ): Promise<DeleteResult> {
+    const article = await this.findBySlug(slug);
+    if (!article) {
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND);
+    }
+    if (article.author.id !== currentUserId) {
+      throw new HttpException(
+        'You are not allowed to delete this article',
+        HttpStatus.FORBIDDEN,
+      );
+    }
+    return await this.articleRepository.delete({ slug });
   }
 
   buildArticleResponse(article: ArticleEntity): ArticleResponseInterface {
