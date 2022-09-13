@@ -34,7 +34,13 @@ export const JWT_SECRET = 'your_secret';
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
+
+#create db structure
+$ yarn db:migrate
+
+#drop db structure
+$ yarn db:drop
 ```
 
 ## Running the app
@@ -44,7 +50,7 @@ $ npm install
 $ npm run start
 
 # watch mode
-$ npm run start:dev
+$ yarn start
 
 # production mode
 $ npm run start:prod
@@ -69,9 +75,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Trach Vitaliy](https://github.com/trachv)
 
 ## License
 

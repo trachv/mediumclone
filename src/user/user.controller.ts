@@ -30,7 +30,7 @@ export class UserController {
     return this.userService.buildUserResponce(user);
   }
 
-  @Post('/user/login')
+  @Post('/users/login')
   @UsePipes(new ValidationPipe())
   async login(
     @Body('user') loginUserDto: LoginUserDto,
