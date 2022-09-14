@@ -34,9 +34,6 @@ export class ArticleEntity {
   tagList: string[];
 
   @Column({ default: 0 })
-  favorites: number;
-
-  @Column({ default: 0 })
   favoritesCount: number;
 
   @BeforeUpdate()

@@ -25,7 +25,7 @@ export class ArticleController {
 
   @Get()
   async findAll(
-    @User() currentUserId: number,
+    @User('id') currentUserId: number,
     @Query() query: any,
   ): Promise<ArticlesResponseInterface> {
     return this.articleService.findAll(currentUserId, query);
@@ -85,6 +85,19 @@ export class ArticleController {
     @Param('slug') slug: string,
   ): Promise<ArticleResponseInterface> {
     const article = await this.articleService.addArticlesToFavotites(
+      slug,
+      currentUserId,
+    );
+    return this.articleService.buildArticleResponse(article);
+  }
+
+  @Delete(':slug/favorite')
+  @UseGuards(AuthGuard)
+  async deleteArticleFromToFavotites(
+    @User('id') currentUserId: number,
+    @Param('slug') slug: string,
+  ): Promise<ArticleResponseInterface> {
+    const article = await this.articleService.deleteArticleFromFavotites(
       slug,
       currentUserId,
     );
