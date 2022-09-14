@@ -36,6 +36,9 @@ export class ArticleEntity {
   @Column({ default: 0 })
   favorites: number;
 
+  @Column({ default: 0 })
+  favoritesCount: number;
+
   @BeforeUpdate()
   updateTimestamp() {
     this.updatedAt = new Date();
