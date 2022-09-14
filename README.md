@@ -41,6 +41,9 @@ $ yarn db:migrate
 
 #drop db structure
 $ yarn db:drop
+
+#create seed data
+$ yarn db:seed 
 ```
 
 ## Running the app
