@@ -26,6 +26,8 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+[Frontend](https://github.com/khaledosman/angular-realworld-example-app) on angular.
+
 ## Before install
 
 You must create file src/config.ts:
