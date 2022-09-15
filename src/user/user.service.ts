@@ -29,10 +29,10 @@ export class UserService {
     });
 
     if (userByEmail) {
-      errorResporse.errors['email'] = 'Email has already been taken';
+      errorResporse.errors['email'] = 'has already been taken';
     }
     if (userByUsername) {
-      errorResporse.errors['username'] = 'Username has already been taken';
+      errorResporse.errors['username'] = 'has already been taken';
     }
     if (userByUsername || userByEmail) {
       throw new HttpException(errorResporse, HttpStatus.UNPROCESSABLE_ENTITY);

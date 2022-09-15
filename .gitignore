@@ -3,6 +3,7 @@
 /node_modules
 
 /src/config.ts
+/frontend
 
 # Logs
 logs
